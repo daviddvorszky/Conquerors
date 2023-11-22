@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -20,6 +24,8 @@ const Login = () => {
             //console.log(response.data);
             // Handle success (e.g., redirect, display message)
             setErrorMessage(null);
+            localStorage.setItem('token', response.data.token);
+            navigate(`/profile/${jwtDecode(response.data.token).username}`);
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 setErrorMessage(error.response.data.message);
