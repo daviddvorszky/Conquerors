@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
+const userRoutes = require('./routes/user');
+
+require('dotenv').config();
 
 app.use(express.json());
+
+// Use routes
+app.use('/api/users', userRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
