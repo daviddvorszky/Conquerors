@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Login = () => {
         username: '',
         password: '',
     });
-    
+
     const { username, password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,10 +37,10 @@ const Login = () => {
 
     return (
         <form onSubmit={e => onSubmit(e)}>
-        <input type="text" name="username" value={username} onChange={e => onChange(e)} required /><br></br>
-        <input type="password" name="password" value={password} onChange={e => onChange(e)} required /><br></br>
-        <button type="submit">Login</button><br></br>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <input type="text" name="username" value={username} onChange={e => onChange(e)} required /><br></br>
+            <input type="password" name="password" value={password} onChange={e => onChange(e)} required /><br></br>
+            <button type="submit">Login</button><br></br>
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
         </form>
     );
 };

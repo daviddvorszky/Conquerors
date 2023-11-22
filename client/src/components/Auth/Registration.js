@@ -32,11 +32,11 @@ const Registration = () => {
 
     return (
         <form onSubmit={e => onSubmit(e)}>
-        <input type="text" name="username" value={username} onChange={e => onChange(e)} required /><br></br>
-        <input type="email" name="email" value={email} onChange={e => onChange(e)} required /><br></br>
-        <input type="password" name="password" value={password} onChange={e => onChange(e)} required /><br></br>
-        <button type="submit">Register</button><br></br>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <input type="text" name="username" value={username} onChange={e => onChange(e)} required /><br></br>
+            <input type="email" name="email" value={email} onChange={e => onChange(e)} required /><br></br>
+            <input type="password" name="password" value={password} onChange={e => onChange(e)} required /><br></br>
+            <button type="submit">Register</button><br></br>
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
         </form>
     );
 };
