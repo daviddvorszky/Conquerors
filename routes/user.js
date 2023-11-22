@@ -90,5 +90,27 @@ router.put('/update-password', authenticateToken, async (req, res) => {
   }
 });
 
+// GET endpoint to fetch a user's public profile
+router.get('/profile/:username', authenticateToken, async (req, res) => {
+  try {
+    const { username } = req.params;
+    console.log("Username: " + username);
+
+    const userProfile = await pool.query(
+      'SELECT username, games_played, games_won FROM users WHERE username = $1', 
+      [username]
+    );
+
+    if (userProfile.rows.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(userProfile.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 
 module.exports = router;
