@@ -1,6 +1,11 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
-dotenv.config();
+
+if (process.env.NODE_ENV === 'test') {
+	dotenv.config({ path: '.env.test.local' });
+} else {
+	dotenv.config();
+}
 
 const pool = new Pool({
 	user: process.env.DB_USER,
