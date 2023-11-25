@@ -19,7 +19,6 @@ describe('Update-password Endpoint', () => {
 
     beforeEach(async () => {
         client = await startTransaction();
-        //mockAuthenticateToken();
     });
 
     afterEach(async () => {
