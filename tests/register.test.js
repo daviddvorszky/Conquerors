@@ -35,7 +35,7 @@ describe('Register Endpoint', () => {
     });
 
     // Test for failed register (username already exists)
-    test('should fail login with incorrect credentials', async () => {
+    test('should fail register (already exists)', async () => {
         const response = await supertest(app)
             .post('/api/users/register')
             .send({
