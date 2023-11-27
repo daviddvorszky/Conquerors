@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
 		}
 
 		// Create and send JWT
-		const token = jwt.sign({ user_id: user.rows[0].user_id, username: user.rows[0].username, email: user.rows[0].email }, process.env.JWT_SECRET, { expiresIn: '14d' });
+		const token = jwt.sign({ user_id: user.rows[0].user_id, username: user.rows[0].username, email: user.rows[0].email, skill_level: user.rows[0].skill_level}, process.env.JWT_SECRET, { expiresIn: '14d' });
 		res.json({ token });
 
 	} catch (error) {
@@ -70,8 +70,6 @@ router.put('/update-password', authenticateToken, async (req, res) => {
 	try {
 		const { newPassword } = req.body;
 		const userId = req.user.user_id;
-
-		console.log(req.user);
 
 		// Hash new password
 		const salt = await bcrypt.genSalt(10);
@@ -94,7 +92,6 @@ router.put('/update-password', authenticateToken, async (req, res) => {
 router.get('/profile/:username', authenticateToken, async (req, res) => {
 	try {
 		const { username } = req.params;
-		console.log("Username: " + username);
 
 		const userProfile = await pool.query(
 			'SELECT username, games_played, games_won FROM users WHERE username = $1',
