@@ -5,9 +5,21 @@ import getApiUrl from '../../utils/apiConfig';
 
 const MatchSearch = () => {
     const [isSearching, setIsSearching] = useState(false);
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const [timerIntervalId, setTimerIntervalId] = useState(null);
 
     const startSearch = async () => {
         setIsSearching(true);
+        setElapsedTime(0);
+        const searchStartTime = Date.now();
+
+        const timerInterval = setInterval(() => {
+            const currentTime = Date.now();
+            const timeElapsed = Math.floor((currentTime - searchStartTime) / 1000);
+            setElapsedTime(timeElapsed);
+        }, 1000);
+
+        setTimerIntervalId(timerInterval);
         try {
             const response = await axios.post(`${getApiUrl()}/api/matchmaking/search-match`, {}, {
                 headers: {
@@ -34,6 +46,9 @@ const MatchSearch = () => {
             // Handle match found
             console.log('Match cancelled:', response.data);
             setIsSearching(false);
+            if (timerIntervalId) {
+                clearInterval(timerIntervalId);
+            }
         } catch (error) {
             // Handle errors
             console.error('Error cancelling search:', error);
@@ -55,11 +70,19 @@ const MatchSearch = () => {
         };
     }, [isSearching]);
 
+    useEffect(() => {
+        return () => {
+            if (timerIntervalId) {
+                clearInterval(timerIntervalId);
+            }
+        };
+    }, [timerIntervalId]);
+
     return (
         <div>
             {isSearching ? (
                 <div>
-                    <p>Searching for a match...</p>
+                    <p>Searching for a match... Time elapsed: {elapsedTime} seconds</p>
                     <button onClick={cancelSearch}>Cancel Search</button>
                 </div>
             ) : (
