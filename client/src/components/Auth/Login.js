@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import getApiUrl from '../../utils/apiConfig';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Login = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, formData);
+            const response = await axios.post(`${getApiUrl()}/api/users/login`, formData);
             //console.log(response.data);
             // Handle success (e.g., redirect, display message)
             setErrorMessage(null);

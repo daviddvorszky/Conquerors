@@ -1,6 +1,7 @@
 // MatchSearch.js in your React app
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import getApiUrl from '../../utils/apiConfig';
 
 const MatchSearch = () => {
     const [isSearching, setIsSearching] = useState(false);
@@ -8,7 +9,7 @@ const MatchSearch = () => {
     const startSearch = async () => {
         setIsSearching(true);
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/matchmaking/search-match`, {}, {
+            const response = await axios.post(`${getApiUrl()}/api/matchmaking/search-match`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

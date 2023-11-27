@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import getApiUrl from '../../utils/apiConfig';
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const Registration = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, formData);
+            const response = await axios.post(`${getApiUrl()}/api/users/register`, formData);
             //console.log(response.data);
             // Handle success (e.g., redirect, display message)
             setSuccessMessage('User registered: ' + response.data.username)

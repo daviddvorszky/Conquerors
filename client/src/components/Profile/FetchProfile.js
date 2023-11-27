@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import getApiUrl from '../../utils/apiConfig';
 
 const FetchProfile = () => {
 	const { username } = useParams();
@@ -15,7 +16,7 @@ const FetchProfile = () => {
 		const fetchProfile = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile/${username}`, {
+				const response = await axios.get(`${getApiUrl()}/api/users/profile/${username}`, {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem('token')}`
 					}

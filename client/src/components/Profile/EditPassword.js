@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import getApiUrl from '../../utils/apiConfig';
 
 const EditPassword = () => {
 	const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const EditPassword = () => {
 
 		// Proceed with updating the password
 		try {
-			const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/users/update-password`, formData, {
+			const response = await axios.put(`${getApiUrl()}/api/users/update-password`, formData, {
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem('token')}`
 				}
