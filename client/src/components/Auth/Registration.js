@@ -12,6 +12,7 @@ const Registration = () => {
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+    const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = async e => {
@@ -20,6 +21,7 @@ const Registration = () => {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, formData);
             //console.log(response.data);
             // Handle success (e.g., redirect, display message)
+            setSuccessMessage('User registered: ' + response.data.username)
             setErrorMessage('');
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
@@ -36,6 +38,7 @@ const Registration = () => {
             <input type="email" name="email" value={email} onChange={e => onChange(e)} required /><br></br>
             <input type="password" name="password" value={password} onChange={e => onChange(e)} required /><br></br>
             <button type="submit">Register</button><br></br>
+            {successMessage && <div className="success-message">{successMessage}</div>}
             {errorMessage && <div className="error-message">{errorMessage}</div>}
         </form>
     );
