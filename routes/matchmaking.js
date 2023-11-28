@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authenticateToken = require('../middlewares/authenticateToken');
-const { v4: uuidv4 } = require('uuid');
+const gameManager = require('../game/GameManager');
 
 let matchQueue = [];
 
@@ -35,7 +35,7 @@ router.post('/search-match', authenticateToken, async (req, res) => {
 
     // Mark players as matched and create match IDs
     groups.forEach(group => {
-        const matchId = uuidv4();
+        const matchId = gameManager.createGame(group.filter(player => player.username));
         group.forEach(player => {
             const playerInQueue = matchQueue.find(p => p.userId === player.userId);
             if (playerInQueue) {
@@ -51,7 +51,7 @@ router.post('/search-match', authenticateToken, async (req, res) => {
     // Notify players about their matches
     groups.forEach(group => {
         group.forEach(player => {
-            player.res.json({ matchId: player.matchId, players: group.map(p => p.username) });
+            player.res.json({ gameId: player.matchId, players: group.map(p => p.username) });
         });
     });
 });
