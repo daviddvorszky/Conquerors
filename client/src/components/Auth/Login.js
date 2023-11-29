@@ -26,7 +26,7 @@ const Login = () => {
             // Handle success (e.g., redirect, display message)
             setErrorMessage(null);
             localStorage.setItem('token', response.data.token);
-            navigate(`/profile/${jwtDecode(response.data.token).username}`);
+            navigate(`/`);
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 setErrorMessage(error.response.data.message);

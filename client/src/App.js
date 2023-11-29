@@ -5,7 +5,7 @@ import Login from './components/Auth/Login';
 import FetchProfile from './components/Profile/FetchProfile';
 import EditPassword from './components/Profile/EditPassword';
 import MatchSearch from './components/Matchmaking/MatchSearch';
-import SocketIOComponent from './components/Test/SocketIOComponent';
+import MainMenu from './components/Main/MainMenu';
 
 const App = () => {
 	return (
@@ -16,7 +16,7 @@ const App = () => {
 				<Route path="/profile/:username" element={<FetchProfile />} />
 				<Route path="/edit-password" element={<EditPassword />} />
 				<Route path="/search-match" element={<MatchSearch />} />
-				<Route path="/" element={<SocketIOComponent />} />
+				<Route path="/" element={<MainMenu />} />
 			</Routes>
 		</Router>
 	);

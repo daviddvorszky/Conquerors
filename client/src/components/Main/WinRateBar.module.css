@@ -1,0 +1,13 @@
+.winRateBarContainer {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.winRateBar {
+    height: 20px;
+    background-color: green;
+    border-radius: 5px;
+    transition: width 0.5s;
+}
