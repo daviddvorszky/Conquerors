@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import NavigationMenu from './NavigationMenu';
 import LogoutButton from './LogoutButton';
@@ -10,7 +11,8 @@ import Settings from './Settings';
 import useAuth from '../../hooks/useAuth';
 import styles from './MainPage.module.css';
 
-const MainPage = ({ onLogout }) => {
+const MainPage = () => {
+    const navigate = useNavigate();
 
     const [selectedMenu, setSelectedMenu] = useState('main');
 
@@ -51,6 +53,11 @@ const MainPage = ({ onLogout }) => {
     const onSelectMenu = (menu) => {
         setSelectedMenu(menu);
     };
+
+    const onLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    }
 
     return (
         <div className={styles.container}>
