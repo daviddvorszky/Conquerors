@@ -56,7 +56,14 @@ router.post('/login', async (req, res) => {
 		}
 
 		// Create and send JWT
-		const token = jwt.sign({ user_id: user.rows[0].user_id, username: user.rows[0].username, email: user.rows[0].email, skill_level: user.rows[0].skill_level}, process.env.JWT_SECRET, { expiresIn: '14d' });
+		const token = jwt.sign({
+			user_id: user.rows[0].user_id,
+			username: user.rows[0].username,
+			email: user.rows[0].email,
+			skill_level: user.rows[0].skill_level,
+			games_played: user.rows[0].games_played,
+			games_won: user.rows[0].games_won
+		}, process.env.JWT_SECRET, { expiresIn: '14d' });
 		res.json({ token });
 
 	} catch (error) {
