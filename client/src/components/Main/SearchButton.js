@@ -1,4 +1,4 @@
-import styles from './MainMenu.module.css';
+import styles from './MainPage.module.css';
 const SearchButton = ({ onSearch }) => {
     return (
         <button className={styles.searchMatchButton} onClick={onSearch}>

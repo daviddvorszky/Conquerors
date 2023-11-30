@@ -1,4 +1,4 @@
-import styles from './MainMenu.module.css';
+import styles from './MainPage.module.css';
 const WelcomeMessage = ({ username }) => {
     return (
         <div className={styles.welcomeText}>
