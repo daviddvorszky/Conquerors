@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+
 
 const socket = io('http://localhost:3001'); // Adjust as needed
 
@@ -13,6 +14,8 @@ const Game = () => {
     const [guessed, setGuessed] = useState(false);
     const [gameState, setGameState] = useState({});
     const [test, setTest] = useState(0);
+
+    const navigate = useNavigate();
 
     const getStatusText = (playerGuessed) => {
         return playerGuessed ? "Guessed" : "Thinking";
@@ -26,6 +29,10 @@ const Game = () => {
         setGuessed(true)
         socket.emit('submitGuess', gameId, username, guess);
     };
+
+    const backToMainPage = () => {
+        navigate('/');
+    }
 
     useEffect(() => {
         console.log('useEffect is running');
@@ -56,7 +63,7 @@ const Game = () => {
             <p>{players[1]}: {getStatusText(gameState.player2guessed)}</p>
             <p>{players[2]}: {getStatusText(gameState.player3guessed)}</p>
             {gameState.isComplete && <p>{gameState.winner} won!</p>}
-            {gameState.isComplete && <button onClick={console.log("Go back to the main menu")}>Back to Main Page</button>}
+            {gameState.isComplete && <button onClick={e => backToMainPage(e)}>Back to Main Page</button>}
             {test&&<p>Test: {test}</p>}
             {true&&<p>isComplete: {gameState.isComplete}</p>}
         </div>
