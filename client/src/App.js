@@ -6,6 +6,7 @@ import FetchProfile from './components/Profile/FetchProfile';
 import EditPassword from './components/Profile/EditPassword';
 import MatchSearch from './components/Matchmaking/MatchSearch';
 import SocketIOComponent from './components/Test/SocketIOComponent';
+import Game from './components/Matchmaking/Game';
 
 const App = () => {
 	return (
@@ -17,6 +18,7 @@ const App = () => {
 				<Route path="/edit-password" element={<EditPassword />} />
 				<Route path="/search-match" element={<MatchSearch />} />
 				<Route path="/" element={<SocketIOComponent />} />
+				<Route path="/game" element={<Game/>} />
 			</Routes>
 		</Router>
 	);

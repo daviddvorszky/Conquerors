@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import getApiUrl from '../../utils/apiConfig';
+import { useNavigate } from 'react-router-dom';
 
 const MatchSearch = () => {
     const [isSearching, setIsSearching] = useState(false);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [timerIntervalId, setTimerIntervalId] = useState(null);
+    const navigate = useNavigate();
 
     const startSearch = async () => {
         setIsSearching(true);
@@ -28,6 +30,9 @@ const MatchSearch = () => {
             });
             // Handle match found
             console.log('Match found:', response.data);
+            const gameId = response.data.gameId;
+            const players = response.data.players;
+            navigate('/game', { state: { gameId, players } });
         } catch (error) {
             // Handle errors
             console.error('Error during match search:', error);
