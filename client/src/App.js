@@ -8,6 +8,7 @@ import MatchSearch from './components/Matchmaking/MatchSearch';
 import MainPage from './components/Main/MainPage';
 import SocketIOComponent from './components/Test/SocketIOComponent';
 import Game from './components/Matchmaking/Game';
+import RegionClickDetection from './components/Test/RegionClickDetection';
 
 const App = () => {
 	return (
@@ -20,6 +21,7 @@ const App = () => {
 				<Route path="/search-match" element={<MatchSearch />} />
 				<Route path="/" element={<MainPage />} />
 				<Route path="/game" element={<Game/>} />
+				<Route path='/test' element={<RegionClickDetection/>} />
 			</Routes>
 		</Router>
 	);
