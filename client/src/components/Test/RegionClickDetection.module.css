@@ -1,24 +1,35 @@
 .cls1 {
-    fill: lime;
+    fill: #EEB;
+}
+
+.cls2 {
+    fill: #BCE;
+}
+
+.cls3 {
+    fill: #CDA;
+}
+
+.cls4 {
+    fill: #FCC
 }
 
 .cls1,
 .cls2,
-.cls3 {
+.cls3,
+.cls4 {
     fill-rule: evenodd;
 }
 
-.cls1:hover,
-.cls2:hover,
-.cls3:hover{
-    fill: yellow;
+.cls1:hover {
+    fill: #eded8e;
 }
-
-
-.cls2 {
-    fill: blue;
+.cls2:hover {
+    fill: #8eaeed;
 }
-
-.cls3 {
-    fill: red;
+.cls3:hover {
+    fill: #c0de85;
+}
+.cls4:hover {
+    fill: #ff9999;
 }
