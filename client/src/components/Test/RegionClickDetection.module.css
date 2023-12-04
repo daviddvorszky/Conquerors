@@ -33,3 +33,10 @@
 .cls4:hover {
     fill: #ff9999;
 }
+
+.RegionClickDetection {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 80%;
+}
