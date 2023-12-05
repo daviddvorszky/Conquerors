@@ -1,0 +1,147 @@
+.Empty {
+    fill: #EEB;
+}
+
+/* Empty to Blue */
+.EmptyToBlue {
+    fill: #BCE;
+    /* Set the initial fill to the target color */
+    animation: FromEmptyToBlue 1s ease-in-out forwards;
+}
+
+@keyframes FromEmptyToBlue {
+    0% {
+        fill: #EEB;
+    }
+
+    100% {
+        fill: #BCE;
+    }
+}
+
+/* Empty to Green */
+.EmptyToGreen {
+    fill: #CDA;
+    /* Set the initial fill to the target color */
+    animation: FromEmptyToGreen 1s ease-in-out forwards;
+}
+
+@keyframes FromEmptyToGreen {
+    0% {
+        fill: #EEB;
+    }
+
+    100% {
+        fill: #CDA;
+    }
+}
+
+/* Empty to Red */
+.EmptyToRed {
+    fill: #FCC;
+    /* Set the initial fill to the target color */
+    animation: FromEmptyToRed 1s ease-in-out forwards;
+}
+
+@keyframes FromEmptyToRed {
+    0% {
+        fill: #EEB;
+    }
+
+    100% {
+        fill: #FCC;
+    }
+}
+
+/* Blue to Green */
+.BlueToGreen {
+    fill: #CDA;
+    /* Set the initial fill to the target color */
+    animation: FromBlueToGreen 1s ease-in-out forwards;
+}
+
+@keyframes FromBlueToGreen {
+    0% {
+        fill: #BCE;
+    }
+
+    100% {
+        fill: #CDA;
+    }
+}
+
+/* Blue to Red */
+.BlueToRed {
+    fill: #FCC;
+    /* Set the initial fill to the target color */
+    animation: FromBlueToRed 1s ease-in-out forwards;
+}
+
+@keyframes FromBlueToRed {
+    0% {
+        fill: #BCE;
+    }
+
+    100% {
+        fill: #FCC;
+    }
+}
+
+/* Green to Blue */
+.GreenToBlue {
+    fill: #BCE;
+    /* Set the initial fill to the target color */
+    animation: FromGreenToBlue 1s ease-in-out forwards;
+}
+
+@keyframes FromGreenToBlue {
+    0% {
+        fill: #CDA;
+    }
+
+    100% {
+        fill: #BCE;
+    }
+}
+
+/* Green to Red */
+.GreenToRed {
+    fill: #FCC;
+    /* Set the initial fill to the target color */
+    animation: FromGreenToRed 1s ease-in-out forwards;
+}
+
+@keyframes FromGreenToRed {
+    0% {
+        fill: #CDA;
+    }
+
+    100% {
+        fill: #FCC;
+    }
+}
+
+/* Red to Blue */
+.RedToBlue {
+    fill: #BCE;
+    /* Set the initial fill to the target color */
+    animation: FromRedToBlue 1s ease-in-out forwards;
+}
+
+@keyframes FromRedToBlue {
+    0% {
+        fill: #FCC;
+    }
+
+    100% {
+        fill: #BCE;
+    }
+}
+
+
+.Map {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 80%;
+}

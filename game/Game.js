@@ -1,10 +1,18 @@
+const GameStates = {
+    WAITING_FOR_PLAYERS: 'WAITING_FOR_PLAYERS',
+    CHOOSING_CAPITAL: 'CHOOSING_CAPITAL',
+    EXPANSION: 'EXPANSION',
+    FIGHT: 'FIGHT',
+    FINISHED: 'FINISHED',
+};
+
 class Game {
     constructor(gameId, players) {
         this.gameId = gameId;
-        this.players = players; // Array of player objects or IDs
+        this.players = players;
         this.guesses = new Map(); // To store players' guesses
-        this.isComplete = false;
         this.winner = null;
+        this.currentState = GameStates.WAITING_FOR_PLAYERS;
     }
 
     addGuess(username, guess) {
@@ -20,7 +28,7 @@ class Game {
             player2guessed: Array.from(this.guesses.keys()).some(username => username == this.players[1].username),
             player3guessed: Array.from(this.guesses.keys()).some(username => username == this.players[2].username),
             winner: this.winner,
-            isComplete: this.isComplete
+            gameState: this.currentState
         };
     }
 
@@ -44,7 +52,7 @@ class Game {
             if (value === w)
                 this.winner = key;
         }
-        this.isComplete = true;
+        this.currentState = GameStates.FINISHED;
     }
 }
 
