@@ -41,6 +41,7 @@ router.post('/search-match', authenticateToken, async (req, res) => {
             if (playerInQueue) {
                 playerInQueue.matched = true;
                 playerInQueue.matchId = matchId; // Assign match ID
+                playerInQueue.sessionId = gameManager.createUserSession(player.username);
             }
         });
     });
@@ -51,7 +52,7 @@ router.post('/search-match', authenticateToken, async (req, res) => {
     // Notify players about their matches
     groups.forEach(group => {
         group.forEach(player => {
-            player.res.json({ gameId: player.matchId, players: group.map(p => p.username) });
+            player.res.json({ gameId: player.matchId, sessionId: player.sessionId, players: group.map(p => p.username) });
         });
     });
 });

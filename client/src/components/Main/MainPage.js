@@ -95,8 +95,10 @@ const MainPage = () => {
             // Handle match found
             console.log('Match found:', response.data);
             const gameId = response.data.gameId;
+            const sessionId = response.data.sessionId;
             const players = response.data.players;
-            navigate('/game', { state: { gameId, players } });
+            console.log("sessionId:" + sessionId);
+            navigate('/game', { state: { gameId, sessionId, players } });
         } catch (error) {
             // Handle errors
             console.error('Error during match search:', error);

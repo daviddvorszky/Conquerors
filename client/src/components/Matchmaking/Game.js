@@ -7,13 +7,12 @@ import useAuth from '../../hooks/useAuth';
 const socket = io('http://localhost:3001'); // Adjust as needed
 
 const Game = () => {
-    const username = useAuth();
+    const user = useAuth();
     const location = useLocation();
-    const { gameId, players } = location.state || {};
+    const { gameId, sessionId, players } = location.state || {};
     const [guess, setGuess] = useState('');
     const [guessed, setGuessed] = useState(false);
-    const [gameState, setGameState] = useState({});
-    const [test, setTest] = useState(0);
+    const [gameState, setGameState] = useState({})
 
     const navigate = useNavigate();
 
@@ -22,12 +21,14 @@ const Game = () => {
     };
 
     useEffect(() => {
-        socket.emit('joinGame', gameId, username);
-    }, [gameId, username]);
+        if(user){
+            socket.emit('joinGame', gameId, sessionId, user.username);
+        }
+    }, [gameId, user]);
 
     const submitGuess = () => {
         setGuessed(true)
-        socket.emit('submitGuess', gameId, username, guess);
+        socket.emit('submitGuess', gameId, sessionId, user.username, guess);
     };
 
     const backToMainPage = () => {
@@ -35,25 +36,29 @@ const Game = () => {
     }
 
     useEffect(() => {
-        console.log('useEffect is running');
-        
-        function handler(state) {
-            console.log('gameUpdate event received:', state);
+        function handleUpdate(state) {
+            console.log(state);
             setGameState((prevGameState) => ({
                 ...prevGameState,
                 ...state
             }));
-            setTest(test+1);
-            console.log(test);
         }
-        
-        socket.on('gameUpdate', handler);
+        socket.on('gameUpdate', handleUpdate);
     
         return () => {
             socket.off('gameUpdate');
-            console.log('useEffect cleanup');
         };
-    }, [gameState, test]);
+    }, [gameState]);
+
+    useEffect(() => {
+        function handleError({message, allowNewGuess}){
+            if(allowNewGuess) setGuessed(false);
+        }
+        socket.on('submitGuessError', handleError);
+        return () => {
+            socket.off('submitGuessError');
+        }
+    }, [guessed]);
 
     return (
         <div>
@@ -64,8 +69,6 @@ const Game = () => {
             <p>{players[2]}: {getStatusText(gameState.player3guessed)}</p>
             {gameState.isComplete && <p>{gameState.winner} won!</p>}
             {gameState.isComplete && <button onClick={e => backToMainPage(e)}>Back to Main Page</button>}
-            {test&&<p>Test: {test}</p>}
-            {true&&<p>isComplete: {gameState.isComplete}</p>}
         </div>
     );
 

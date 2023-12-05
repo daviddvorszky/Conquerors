@@ -16,9 +16,9 @@ class Game {
 
     getGameState() {
         return {
-            player1guessed: Array.from(this.guesses.keys()).some(key => key.username == this.players[0].username),
-            player2guessed: Array.from(this.guesses.keys()).some(key => key.username == this.players[1].username),
-            player3guessed: Array.from(this.guesses.keys()).some(key => key.username == this.players[2].username),
+            player1guessed: Array.from(this.guesses.keys()).some(username => username == this.players[0].username),
+            player2guessed: Array.from(this.guesses.keys()).some(username => username == this.players[1].username),
+            player3guessed: Array.from(this.guesses.keys()).some(username => username == this.players[2].username),
             winner: this.winner,
             isComplete: this.isComplete
         };
@@ -35,14 +35,14 @@ class Game {
     }
 
     determineWinner() {
-        let x = this.guesses.get(Array.from(this.guesses.keys()).find(key => key.username === this.players[0].username));
-        let y = this.guesses.get(Array.from(this.guesses.keys()).find(key => key.username === this.players[1].username));
-        let z = this.guesses.get(Array.from(this.guesses.keys()).find(key => key.username === this.players[2].username));
+        let x = this.guesses.get(Array.from(this.guesses.keys()).find(username => username === this.players[0].username));
+        let y = this.guesses.get(Array.from(this.guesses.keys()).find(username => username === this.players[1].username));
+        let z = this.guesses.get(Array.from(this.guesses.keys()).find(username => username === this.players[2].username));
         console.log(x + " " + y + " " + z);
         const w = this.findMiddleNumber(x, y, z);
         for (let [key, value] of this.guesses.entries()) {
             if (value === w)
-                this.winner = key.username;
+                this.winner = key;
         }
         this.isComplete = true;
     }
