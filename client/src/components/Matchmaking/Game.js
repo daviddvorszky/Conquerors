@@ -24,7 +24,7 @@ const Game = () => {
         if(user){
             socket.emit('joinGame', gameId, sessionId, user.username);
         }
-    }, [gameId, user]);
+    }, [gameId, sessionId, user]);
 
     const submitGuess = () => {
         setGuessed(true)
